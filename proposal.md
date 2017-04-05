@@ -47,7 +47,7 @@ This object should have the key `tlsInfo` and be included in the `details` objec
 
 * TLS version
 
-`tlsVersion: string (optional)`
+  `tlsVersion: string (optional)`
 
   Again no way of extracting from chain, useful for determining version deployment and hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the standardized version (i.e. `TLS 1.2` or `SSL 3.0`).
   
