@@ -50,18 +50,6 @@ This object should have the key `tlsInfo` and be included in the `details` objec
   `tlsVersion: string (optional)`
 
   Again no way of extracting from chain, useful for determining version deployment and hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the standardized version (i.e. `TLS 1.2` or `SSL 3.0`).
-  
-* SCT embeded in handshake
-
-  `embededSCT: array of array of raw der (optional)`
-  
-  In the case where a certificate doesn't use an embeded SCT this allows plugins to display information about present SCTs and which CT logs a certificate may be present in by parsing the raw DER.
-
-* OCSP embeded in handshake
-
-  `embededOCSP: array of array of raw der (optional)`
-  
-  Provides plugins with information about stapled OCSP responses, in the case where one or more SCTs are delivered in a OCSP response this also allows plugins to provide information about CT logs the certificate may be present in. 
 
 ## Open Questions
 
