@@ -47,9 +47,9 @@ This object should have the key `tlsInfo` and be included in the `details` objec
 
 * TLS version
 
-  `tlsVersion: object{major: int, minor: int} (optional)`
+  `tlsVersion: string (optional)`
 
-  Again no way of extracting from chain, useful for determining version deployment and hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. There is some complexity in how this would be exposed since version numbers for things like draft vs. final TLS 1.3. In order to not complicate API stability perhaps just the version indicator ints defined in the various RFCs could be used and no attempt should be made to map these to a human readable string.
+  Again no way of extracting from chain, useful for determining version deployment and hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the standardized version (i.e. `TLS 1.2` or `SSL 3.0`).
 
 ## Open Questions
 
