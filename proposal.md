@@ -43,13 +43,13 @@ This object should have the key `tlsInfo` and be included in the `details` objec
 
   `cipherSuite: string (optional)`
 
-  No way of extracting from chain, useful for determining feature deployment + understanding which suite a server/browser decided on, no real way of replicating via crawling without replicating the various suite lists provided by browsing on an ongoing basis. String should be RFC style format names (i.e. `TLS_RSA_WITH_AES_256_GCM_SHA384`). Field should not be present if `protocol` contains the value `QUIC`.
+  No way of extracting from chain, useful for determining feature deployment + understanding which suite a server/browser decided on, no real way of replicating via crawling without replicating the various suite lists provided by browsing on an ongoing basis. String should be RFC style format names (i.e. `TLS_RSA_WITH_AES_256_GCM_SHA384`).
 
 * TLS version
 
   `tlsVersion: string (optional)`
 
-  Again no way of extracting from chain, useful for determining version deployment and hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the standardized version (i.e. `TLS 1.2` or `SSL 3.0`). Field should not be present if `protocol` contains the value `QUIC`.
+  Again no way of extracting from chain, useful for determining version deployment and hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the standardized version (i.e. `TLS 1.2` or `SSL 3.0`).
 
 ## Open Questions
 
