@@ -8,11 +8,11 @@ While the existing webRequest API provides basically carte blanche access to the
 
 The lack of any kind of introspection prevents the development of a number of security focused plugins such as:
 
-a. plugins that feed third-party telemetry systems like EFF's DSO
-b. plugins that want to replicate functionality of things like SSL Labs security scoring
-c. plugins that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer
-d. plugins that want to attempt MITM detection services
-e. plugins that help debug various TLS deployment issues
+1. plugins that feed third-party telemetry systems like EFF's DSO
+2. plugins that want to replicate functionality of things like SSL Labs security scoring
+3. plugins that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer
+4. plugins that want to attempt MITM detection services
+5. plugins that help debug various TLS deployment issues
 
 ## Proposed API
 
@@ -22,8 +22,10 @@ This object should have the key `tlsInfo` and be included in the `details` objec
 
 * Built + sent chain (raw DER)
 
-  `builtChain: array of arrays of raw DER`
-  `sentChain: array of arrays of raw DER`
+  ```
+  builtChain: array of arrays of raw DER
+  sentChain: array of arrays of raw DER
+  ```
 
   Both built and sent chain are useful for knowing which path the validation engine considers canonical + for knowing if the server is sending superfluous certificates in the chain for both third-party telemetry gathering and PageSpeed style extensions. No further processing needs to be done beyond providing the raw DER as these can be trivially parsed by extensions and third-party services
 
