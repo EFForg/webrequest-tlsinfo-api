@@ -8,11 +8,11 @@ While the existing webRequest API provides basically carte blanche access to the
 
 The lack of any kind of introspection prevents the development of a number of security focused browser extensions such as:
 
-a. extensions that feed third-party telemetry systems like EFF's DSO
-b. extensions that want to replicate functionality of things like SSL Labs security scoring capabilities
-c. extensions that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer UIs
-d. extensions that want to attempt MITM detection
-e. extensions that help debug various TLS deployment and configuration issues
+1. extensions that feed third-party telemetry systems like EFF's DSO
+2. extensions that want to replicate functionality of things like SSL Labs security scoring capabilities
+3. extensions that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer UIs
+4. extensions that want to attempt MITM detection
+5. extensions that help debug various TLS deployment and configuration issues
 
 ## Proposed API
 
@@ -24,8 +24,10 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
 
 * Built + sent chain (raw DER)
 
-  `builtChain: array of arrays of raw DER`
-  `sentChain: array of arrays of raw DER`
+  ```
+  builtChain: array of arrays of raw DER
+  sentChain: array of arrays of raw DER
+  ```
 
   Both built and sent chain are useful for knowing which path the validation engine considers canonical and for knowing if the server is sending any superfluous certificates in the chain for both third-party telemetry gathering and PageSpeed/SSL Labs style extensions. No further processing needs to be done beyond providing the raw DER as these can be trivially parsed by extensions and third-party services.
 
