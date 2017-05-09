@@ -1,6 +1,6 @@
 # webRequest TLS Introspection API Extension Propsal
 
-This document outlines a proposed extension to the webRequest browser extension API that would add TLS introspection capabilities that are currently missing from all major browsers (exlucding the soon to be deprecated XPCOM/XUL Firefox APIs).
+This document outlines a proposed extension to the webRequest browser extension API that would add TLS introspection capabilities that are currently missing from all major browsers (exlucding the soon to be removed XPCOM/XUL Firefox APIs).
 
 ## The Problem
 
@@ -8,15 +8,15 @@ While the existing webRequest API provides basically carte blanche access to the
 
 The lack of any kind of introspection prevents the development of a number of security focused browser extensions such as:
 
-a. plugins that feed third-party telemetry systems like EFF's DSO
-b. plugins that want to replicate functionality of things like SSL Labs security scoring capabilities
-c. plugins that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer UIs
-d. plugins that want to attempt MITM detection
-e. plugins that help debug various TLS deployment and configuration issues
+a. extensions that feed third-party telemetry systems like EFF's DSO
+b. extensions that want to replicate functionality of things like SSL Labs security scoring capabilities
+c. extensions that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer UIs
+d. extensions that want to attempt MITM detection
+e. extensions that help debug various TLS deployment and configuration issues
 
 ## Proposed API
 
-We propose that a limited set of TLS connection stateinformation be presented in a new object as part of the `onCompleted` request callback. Providing this information only on the completion of a request would prevent plugins from attempting to meddle with the browsers internal validation engine and would simply provide a window into the outcome of the validation procedures. In cases where the connection fails to complete, such as when Chrome shows validity warning interstitials, the `onCompleted` event is never actualy fired preventing plugins from attempting to subvert various invalidity states.
+We propose that a limited set of TLS connection stateinformation be presented in a new object as part of the `onCompleted` request callback. Providing this information only on the completion of a request would prevent extensions from attempting to meddle with the browsers internal validation engine and would simply provide a window into the outcome of the validation procedures. In cases where the connection fails to complete, such as when Chrome shows validity warning interstitials, the `onCompleted` event is never actualy fired preventing extensions from attempting to subvert various invalidity states.
 
 ### `details` object extension
 
@@ -39,7 +39,7 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
 
   `protocol: enum of [TLS, QUIC]`
   
-  There are certain cases where additional information defined below may not be present because the protocol being used is not actually TLS (mainly just QUIC), this information allows plugins to know whether that extra information should be expected to be present or not.
+  There are certain cases where additional information defined below may not be present because the protocol being used is not actually TLS (mainly just QUIC), this information allows extensions to know whether that extra information should be expected to be present or not.
 
 * Ciphersuite
 
