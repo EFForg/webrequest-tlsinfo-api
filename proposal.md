@@ -8,11 +8,10 @@ While the existing webRequest API provides basically carte blanche access to the
 
 The lack of any kind of introspection prevents the development of a number of security focused browser extensions such as:
 
-1. extensions that feed third-party telemetry systems like EFF's DSO
-2. extensions that want to replicate functionality of things like SSL Labs security scoring capabilities
-3. extensions that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer UIs
-4. extensions that want to attempt MITM detection
-5. extensions that help debug various TLS deployment and configuration issues
+1. extensions that want to replicate functionality of things like SSL Labs security scoring capabilities
+2. extensions that want to provide lower level/more prominent cert chain introspection than provided by existing cert viewer UIs
+3. extensions that want to attempt MITM detection
+4. extensions that help debug various TLS deployment and configuration issues
 
 ## Proposed API
 
