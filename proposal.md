@@ -43,11 +43,11 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
   
   There are certain cases where additional information defined below may not be present because the protocol being used is not actually TLS (mainly just QUIC), this information allows extensions to know whether that extra information should be expected to be present or not.
 
-* Ciphersuite
+* Cipher Suite
 
-  `cipherSuite: string (optional)`
+  `cipherSuite: int (optional)`
 
-  There is no way of extracting this from the chain, useful for determining feature deployment and understanding which suite a server/browser decided on. There is no real way of replicating this information via crawling without replicating the various ciphersuite lists that are provided by browsers on an ongoing basis. String should be in the RFC style format (i.e. `TLS_RSA_WITH_AES_256_GCM_SHA384`). Field should not be present if `protocol` contains the value `QUIC`.
+  There is no way of extracting this from the chain, useful for determining feature deployment and understanding which suite a server/browser decided on. There is no real way of replicating this information via crawling without replicating the various cipher suite lists that are provided by browsers on an ongoing basis. Field should contain the uint16 assigned to the used cipher suite as defined in the IETF [TLS cipher suite registry](https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4). Field should not be present if `protocol` contains the value `QUIC`.
 
 * TLS version
 
