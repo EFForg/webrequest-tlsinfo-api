@@ -53,8 +53,3 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
   `tlsVersion: string (optional)`
 
   Again there is no way of extracting this from the chain, useful for determining version deployment and it is hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the RFC standardized version (i.e. `TLS 1.2` or `SSL 3.0`). Field should not be present if `protocol` contains the value `QUIC`.
-
-## Open Questions
-
-* Should including this information require an extra manifest permission or should the existing `webRequest` permission be enough?
-* Does exposing information about the sent chain create a privacy risk when it may expose enterprise level MITMs which may be personally (or organizationally) identifying?
