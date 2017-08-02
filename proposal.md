@@ -58,7 +58,3 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
 
 Given that adding the `tlsInfo` object can contain relatively large buffers containing the DER encoding of the certificates and there is no upper limit to the number of certificates in a chain this may introduce unwanted performance regressions for certain extensions. In order to prevent this the `OnCompletedOptions` enum should be extended to include a new `tlsInfo` value. The `tlsInfo` object detailed above should only be included in the `details` object passed to the provided callback function if this new value is included in the `opt_extraInfoSpec` passed to the `addListener` method.
 
-## Open Questions
-
-* Should including this information require an extra manifest permission or should the existing `webRequest` permission be enough?
-* Does exposing information about the sent chain create a privacy risk when it may expose enterprise level MITMs which may be personally (or organizationally) identifying?
