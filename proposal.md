@@ -54,6 +54,12 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
 
   Again there is no way of extracting this from the chain, useful for determining version deployment and it is hard to determine with crawling without replicating the same protocol version support that the browser has on an ongoing basis. Format should be a basic string containing the specific protocol and the RFC standardized version (i.e. `TLS 1.2` or `SSL 3.0`). Field should not be present if `protocol` contains the value `QUIC`.
 
+* Key Exchange Group
+
+  `keyExchangeGroup: string (optional)`
+
+  There is no way of extracting this from the key exchange method defined in the `cipherSuite` (and this is decoupled from the cipher suite in TLS 1.3). For ECHD(E) methods this should be a string containing the name of the group curve used.
+
 ### `OnCompletedOptions` extension
 
 Given that adding the `tlsInfo` object can contain relatively large buffers containing the DER encoding of the certificates and there is no upper limit to the number of certificates in a chain this may introduce unwanted performance regressions for certain extensions. In order to prevent this the `OnCompletedOptions` enum should be extended to include a new `tlsInfo` value. The `tlsInfo` object detailed above should only be included in the `details` object passed to the provided callback function if this new value is included in the `opt_extraInfoSpec` passed to the `addListener` method.
