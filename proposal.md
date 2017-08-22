@@ -15,11 +15,11 @@ The lack of any kind of introspection prevents the development of a number of se
 
 ## Proposed API
 
-We propose that a limited set of TLS connection stateinformation be presented in a new object as part of the `onCompleted` request callback. Providing this information only on the completion of a request would prevent extensions from attempting to meddle with the browsers internal validation engine and would simply provide a window into the outcome of the validation procedures. In cases where the connection fails to complete, such as when Chrome shows validity warning interstitials, the `onCompleted` event is never actualy fired preventing extensions from attempting to subvert various invalidity states. A extension to the `onCompletedOptions` enum is also proposed in order to prevent unwanted performance regressions for extensions which are not interested in inspecting TLS information.
+We propose that a limited set of TLS connection stateinformation be presented in a new object as part of the `onCompleted` and `onErrorOccurred` request callbacks. Providing this information only on the completion of a request (either successful or due to a fatal error) would prevent extensions from attempting to meddle with the browsers internal validation engine and would simply provide a window into the outcome of the validation procedures. This also allows side-stepping of rather complex questions about how a browser should treat TLS connections a extension would like to kill/alter that are shared in a HTTP/2 and/or TLS 1.3 context. A extension to the `onCompletedOptions` and `onErrorOccurredOptions` enums is also proposed in order to prevent unwanted performance regressions for extensions which are not interested in inspecting TLS information.
 
 ### `details` object extension
 
-This new TLS state object should have the key `tlsInfo` and be included in the `details` object passed to the callback method for the `onCompleted` event when a request is made using HTTPS and the information is available (in certain response caching situations this information may not be available when requesting a HTTPS url and may be omitted) and contain at least the following information:
+This new TLS state object should have the key `tlsInfo` and be included in the `details` object passed to the callback methods for the `onCompleted` and `onErrorOccurred` events when a request is made using HTTPS and the information is available (in certain response caching situations this information may not be available when requesting a HTTPS url and may be omitted) and contain at least the following information:
 
 * Built + sent chain (raw DER)
 
@@ -62,5 +62,5 @@ This new TLS state object should have the key `tlsInfo` and be included in the `
 
 ### `OnCompletedOptions` extension
 
-Given that adding the `tlsInfo` object can contain relatively large buffers containing the DER encoding of the certificates and there is no upper limit to the number of certificates in a chain this may introduce unwanted performance regressions for certain extensions. In order to prevent this the `OnCompletedOptions` enum should be extended to include a new `tlsInfo` value. The `tlsInfo` object detailed above should only be included in the `details` object passed to the provided callback function if this new value is included in the `opt_extraInfoSpec` passed to the `addListener` method.
+Given that adding the `tlsInfo` object can contain relatively large buffers containing the DER encoding of the certificates and there is no upper limit to the number of certificates in a chain this may introduce unwanted performance regressions for certain extensions. In order to prevent this the `OnCompletedOptions` and `onErrorOccurredOptions`  enums should be extended to include a new `tlsInfo` value. The `tlsInfo` object detailed above should only be included in the `details` object passed to the provided callback function if this new value is included in the `opt_extraInfoSpec` passed to the `addListener` method for the callbacks `onCompleted` and `onErrorOccurred`.
 
