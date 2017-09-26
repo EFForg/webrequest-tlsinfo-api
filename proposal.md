@@ -4,7 +4,7 @@ This document outlines a proposed extension to the webRequest browser extension 
 
 ## The Problem
 
-While the existing webRequest API provides basically carte blanche access to the request life cycle the one thing it is missing is any form of introspection into the TLS connection state other than knowing that a user may have requested a HTTPS URL.
+While the existing webRequest API provides basically carte blanche access to the request life cycle the one thing it is missing is any form of introspection into the TLS connection state other than knowing that a user may have requested an HTTPS URL.
 
 The lack of any kind of introspection prevents the development of a number of security focused browser extensions such as:
 
@@ -15,11 +15,11 @@ The lack of any kind of introspection prevents the development of a number of se
 
 ## Proposed API
 
-We propose that a limited set of TLS connection stateinformation be presented in a new object as part of the `onCompleted` and `onErrorOccurred` request callbacks. Providing this information only on the completion of a request (either successful or due to a fatal error) would prevent extensions from attempting to meddle with the browsers internal validation engine and would simply provide a window into the outcome of the validation procedures. This also allows side-stepping of rather complex questions about how a browser should treat TLS connections a extension would like to kill/alter that are shared in a HTTP/2 and/or TLS 1.3 context. A extension to the `onCompletedOptions` and `onErrorOccurredOptions` enums is also proposed in order to prevent unwanted performance regressions for extensions which are not interested in inspecting TLS information.
+We propose that a limited set of TLS connection stateinformation be presented in a new object as part of the `onCompleted` and `onErrorOccurred` request callbacks. Providing this information only on the completion of a request (either successful or due to a fatal error) would prevent extensions from attempting to meddle with the browsers internal validation engine and would simply provide a window into the outcome of the validation procedures. This also allows side-stepping of rather complex questions about how a browser should treat TLS connections an extension would like to kill/alter that are shared in an HTTP/2 and/or TLS 1.3 context. An extension to the `onCompletedOptions` and `onErrorOccurredOptions` enums is also proposed in order to prevent unwanted performance regressions for extensions which are not interested in inspecting TLS information.
 
 ### `details` object extension
 
-This new TLS state object should have the key `tlsInfo` and be included in the `details` object passed to the callback methods for the `onCompleted` and `onErrorOccurred` events when a request is made using HTTPS and the information is available (in certain response caching situations this information may not be available when requesting a HTTPS url and may be omitted) and contain at least the following information:
+This new TLS state object should have the key `tlsInfo` and be included in the `details` object passed to the callback methods for the `onCompleted` and `onErrorOccurred` events when a request is made using HTTPS and the information is available (in certain response caching situations this information may not be available when requesting an HTTPS url and may be omitted) and contain at least the following information:
 
 * Built + sent chain (raw DER)
 
